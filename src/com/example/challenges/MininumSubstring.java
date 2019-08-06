@@ -13,7 +13,7 @@ public class MininumSubstring {
 
         List<Character> charInput = new ArrayList<>();
         Set<Character> uniqueChars = new HashSet();
-        for (char ch: input.toCharArray()) {
+        for (char ch : input.toCharArray()) {
             charInput.add(ch);
             uniqueChars.add(ch);
         }
@@ -26,7 +26,7 @@ public class MininumSubstring {
 
             for (int i = 0; i < iterationCount; i++) {
 
-                List<Character> currentData = charInput.subList( i, (i + initialMatchSize));
+                List<Character> currentData = charInput.subList(i, (i + initialMatchSize));
 
                 boolean validFlag = true;
 
@@ -42,11 +42,9 @@ public class MininumSubstring {
                     currentData.forEach(sb::append);
                     return sb.toString();
                 }
-
             }
 
             initialMatchSize++;
-
         }
 
         return null;
