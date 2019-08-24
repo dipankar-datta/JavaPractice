@@ -7,10 +7,17 @@ public class ConnectedGroupsMatrix {
     private static Map<Integer, List<Integer>> links = new HashMap<>();
 
     public static void main(String[] args) {
+//        int[][] input = {
+//                {1, 1, 0},
+//                {1, 1, 0},
+//                {0, 0, 1}
+//        };
+
         int[][] input = {
-                {1, 1, 0},
-                {1, 1, 0},
-                {0, 0, 1}
+                {1, 1, 0, 0},
+                {1, 1, 1, 0},
+                {0, 1, 1, 0},
+                {0, 0, 0, 1}
         };
         System.out.println("Total connected nodes -> " + getNumberOfConnectedGroups(input));
     }
@@ -27,23 +34,23 @@ public class ConnectedGroupsMatrix {
 
                 if (connections[j] == 1) {
 
-                    if (!links.containsKey((i + 1))) {
+                    if (!links.containsKey((i))) {
                         List<Integer> bucket = new ArrayList<>();
-                        bucket.add(j+1);
-                        links.put( (i + 1), bucket);
+                        bucket.add(j);
+                        links.put( (i), bucket);
                     } else {
-                        if (!links.get(i + 1).contains(j +1)) {
-                            links.get(i + 1).add(j +1);
+                        if (!links.get(i).contains(j)) {
+                            links.get(i).add(j);
                         }
                     }
 
-                    if (!links.containsKey((j + 1))) {
+                    if (!links.containsKey((j))) {
                         List<Integer> bucket = new ArrayList<>();
-                        bucket.add(i+1);
-                        links.put( (j + 1), bucket);
+                        bucket.add(i);
+                        links.put( (j), bucket);
                     } else {
-                        if (!links.get(j + 1).contains(i + 1)) {
-                            links.get(j + 1).add(i + 1);
+                        if (!links.get(j).contains(i)) {
+                            links.get(j).add(i);
                         }
                     }
                 }
@@ -51,8 +58,6 @@ public class ConnectedGroupsMatrix {
         }
 
         System.out.println(links.toString());
-
-
 
         List<Integer> visitedNode = new ArrayList<>(links.size());
 
@@ -71,6 +76,7 @@ public class ConnectedGroupsMatrix {
 
         return result;
     }
+
 
     static void BFSUtil(int node, List<Integer> visited, List<Integer> connectedNodes) {
         if (!visited.contains(node)) {
